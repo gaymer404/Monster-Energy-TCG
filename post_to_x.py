@@ -1,4 +1,4 @@
-"""Post one promo message to X, rotating daily through x_posts.json."""
+"""Post one promo message to X every POST_INTERVAL_DAYS days, rotating through x_posts.json."""
 import datetime
 import json
 import os
@@ -10,12 +10,22 @@ import tweepy
 URL = "https://gaymer404.github.io/Monster-Energy-TCG/"
 MAX_LEN = 280
 URL_LEN = 23  # X counts every link as 23 characters
+# Fixed website line added to every post.
+WEBSITE_LINE = "\n\n🌐 Check out the website: {url}"
+INTERVAL_DAYS = int(os.environ.get("POST_INTERVAL_DAYS", "3"))
 
 here = pathlib.Path(__file__).parent
 posts = json.loads((here / "x_posts.json").read_text(encoding="utf-8"))
 
-index = datetime.datetime.now(datetime.timezone.utc).date().toordinal() % len(posts)
-text = posts[index].replace("{url}", URL)
+today = datetime.datetime.now(datetime.timezone.utc).date().toordinal()
+# The schedule fires daily; only every INTERVAL_DAYS-th day posts. Manual runs always post.
+if os.environ.get("GITHUB_EVENT_NAME") == "schedule" and today % INTERVAL_DAYS:
+    print(f"Not a posting day (every {INTERVAL_DAYS} days), skipping.")
+    sys.exit(0)
+
+index = (today // INTERVAL_DAYS) % len(posts)
+template = posts[index] + WEBSITE_LINE
+text = template.replace("{url}", URL)
 
 
 def weighted_length(post: str) -> int:
@@ -25,7 +35,7 @@ def weighted_length(post: str) -> int:
     return chars + (URL_LEN if "{url}" in post else 0)
 
 
-length = weighted_length(posts[index])
+length = weighted_length(template)
 if length > MAX_LEN:
     sys.exit(f"Post {index} is {length} characters, over the {MAX_LEN} limit.")
 
