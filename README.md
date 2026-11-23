@@ -44,7 +44,7 @@ Both the app and the website ship a dark theme (default) and a **Monster Ultra W
 
 ## Website
 
-The promo site is [index.html](index.html), a single file with no build step, published with GitHub Pages at **https://nikolmichaelidou.github.io/Monster-Energy-TCG/**.
+The promo site is [index.html](index.html), a single file with no build step, published with GitHub Pages at **https://gaymer404.github.io/Monster-Energy-TCG/**.
 
 It is deployed from the `main` branch, `/ (root)` (Settings → Pages). To preview it locally, open `index.html` in a browser.
 

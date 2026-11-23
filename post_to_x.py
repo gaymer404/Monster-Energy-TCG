@@ -7,7 +7,7 @@ import sys
 
 import tweepy
 
-URL = "https://nikolmichaelidou.github.io/Monster-Energy-TCG/"
+URL = "https://gaymer404.github.io/Monster-Energy-TCG/"
 MAX_LEN = 280
 URL_LEN = 23  # X counts every link as 23 characters
 
