@@ -122,7 +122,21 @@ class _ScanScreenState extends State<ScanScreen> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          MobileScanner(controller: _controller, onDetect: _onDetect),
+          MobileScanner(
+            controller: _controller,
+            onDetect: _onDetect,
+            errorBuilder: (context, error, child) => Center(
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: Text(
+                  error.errorCode == MobileScannerErrorCode.permissionDenied
+                      ? 'Camera access is needed to scan cans. Enable it for Monster TCG in your phone settings.'
+                      : 'The camera is not available right now.',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+          ),
           Center(
             child: Container(
               width: 280,

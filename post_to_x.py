@@ -16,7 +16,16 @@ posts = json.loads((here / "x_posts.json").read_text(encoding="utf-8"))
 
 index = datetime.datetime.now(datetime.timezone.utc).date().toordinal() % len(posts)
 text = posts[index].replace("{url}", URL)
-length = len(posts[index].replace("{url}", "")) + URL_LEN
+
+
+def weighted_length(post: str) -> int:
+    """Approximate X's counting: links are 23, emoji and most non-Latin characters are 2."""
+    body = post.replace("{url}", "")
+    chars = sum(1 if ord(c) <= 0x10FF or 0x2000 <= ord(c) <= 0x203A else 2 for c in body)
+    return chars + (URL_LEN if "{url}" in post else 0)
+
+
+length = weighted_length(posts[index])
 if length > MAX_LEN:
     sys.exit(f"Post {index} is {length} characters, over the {MAX_LEN} limit.")
 
@@ -37,6 +46,12 @@ client = tweepy.Client(
 )
 try:
     response = client.create_tweet(text=text)
+except tweepy.Forbidden as exc:
+    # A manual run plus the scheduled run on the same day posts the same text; that is not a failure.
+    if "duplicate" in str(exc).lower():
+        print(f"Post {index} was already published today, skipping.")
+        sys.exit(0)
+    sys.exit("X API request failed: Forbidden (HTTP 403). Check that the app has Read and write permissions and the tokens were regenerated afterwards.")
 except tweepy.TweepyException as exc:
     # Report only the error type and HTTP status, never request details.
     status = getattr(getattr(exc, "response", None), "status_code", "n/a")
