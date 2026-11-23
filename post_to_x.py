@@ -55,5 +55,7 @@ except tweepy.Forbidden as exc:
 except tweepy.TweepyException as exc:
     # Report only the error type and HTTP status, never request details.
     status = getattr(getattr(exc, "response", None), "status_code", "n/a")
+    if status == 402:
+        sys.exit("X API request failed: Payment Required (HTTP 402). Check the X Developer Console for API billing, available credits, and access to posting, then retry.")
     sys.exit(f"X API request failed: {type(exc).__name__} (HTTP {status})")
 print(f"Posted {response.data['id']}:\n{text}")

@@ -48,6 +48,8 @@ The promo site is [index.html](index.html), a single file with no build step, pu
 
 It is deployed from the `main` branch, `/ (root)` (Settings → Pages). To preview it locally, open `index.html` in a browser.
 
+The **Promote on X** workflow posts daily and can also be run manually, with dry run enabled by default. A live run requires the four X API credentials configured as Actions secrets. If X returns HTTP 402, check API billing, available credits, and posting access in the X Developer Console; restore access before retrying the workflow with dry run disabled. A dry run does not verify billing or publish a post.
+
 ## Project structure
 
 | Path | Purpose |
