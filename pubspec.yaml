@@ -1,0 +1,21 @@
+name: monster_tcg
+description: Scan a Monster Energy can and add a trading card to your virtual collection.
+publish_to: none
+version: 0.1.0+1
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  mobile_scanner: ^5.2.3
+  sqflite: ^2.3.3
+  path: ^1.9.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
