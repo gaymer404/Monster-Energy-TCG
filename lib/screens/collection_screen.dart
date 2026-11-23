@@ -4,18 +4,28 @@ import '../models/flavor.dart';
 import '../models/tcg_card.dart';
 import '../services/card_generator.dart';
 import '../services/collection_db.dart';
+import '../theme.dart';
 import '../widgets/card_view.dart';
 
 class CollectionScreen extends StatelessWidget {
-  const CollectionScreen({super.key, required this.db, required this.generator});
+  const CollectionScreen({
+    super.key,
+    required this.db,
+    required this.generator,
+    required this.themeController,
+  });
 
   final CollectionDb db;
   final CardGenerator generator;
+  final ThemeController themeController;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('My Collection')),
+      appBar: AppBar(
+        title: const Text('My Collection'),
+        actions: [ThemeToggleButton(controller: themeController)],
+      ),
       body: FutureBuilder<List<OwnedCard>>(
         future: db.collection(),
         builder: (context, snap) {

@@ -14,8 +14,12 @@ class CollectionDb {
   static Future<CollectionDb> open() async {
     final db = await openDatabase(
       p.join(await getDatabasesPath(), 'collection.db'),
-      version: 1,
+      version: 2,
+      onUpgrade: (db, oldVersion, _) async {
+        if (oldVersion < 2) await db.execute(_settingsTable);
+      },
       onCreate: (db, _) async {
+        await db.execute(_settingsTable);
         await db.execute('CREATE TABLE cards ('
             'flavor_id TEXT PRIMARY KEY, copies INTEGER NOT NULL, '
             'first_scanned INTEGER NOT NULL)');
@@ -25,6 +29,20 @@ class CollectionDb {
     );
     return CollectionDb._(db);
   }
+
+  static const _settingsTable =
+      'CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT NOT NULL)';
+
+  Future<String?> getSetting(String key) async {
+    final rows = await _db.query('settings', where: 'key = ?', whereArgs: [key]);
+    return rows.isEmpty ? null : rows.first['value'] as String;
+  }
+
+  Future<void> setSetting(String key, String value) => _db.insert(
+        'settings',
+        {'key': key, 'value': value},
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
 
   Future<String?> flavorForBarcode(String barcode) async {
     final rows = await _db.query('barcodes', where: 'barcode = ?', whereArgs: [barcode]);

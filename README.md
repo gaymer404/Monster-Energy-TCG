@@ -38,6 +38,10 @@ An Android app (built with Flutter) that scans your Monster Energy can and turns
 - [ ] Photo-based can recognition
 - [ ] Real card artwork
 
+## Themes
+
+Both the app and the website ship a dark theme (default) and a **Monster Ultra White** theme. Use the sun/moon button in the app bar, or the "Ultra White" button in the website nav. The choice is remembered (in the local database in the app, in `localStorage` on the site).
+
 ## Website
 
 The promo site is [index.html](index.html), a single file with no build step, published with GitHub Pages at **https://nikolmichaelidou.github.io/Monster-Energy-TCG/**.
@@ -52,6 +56,7 @@ It is deployed from the `main` branch, `/ (root)` (Settings → Pages). To previ
 | `lib/services/card_generator.dart` | Deterministic card generation |
 | `lib/services/collection_db.dart` | SQLite collection and barcode links |
 | `lib/screens/` | Scan and collection screens |
+| `lib/theme.dart` | Dark and Ultra White themes, theme toggle |
 | `lib/widgets/card_view.dart` | Card rendering |
 | `test/` | Unit tests for the generator |
 

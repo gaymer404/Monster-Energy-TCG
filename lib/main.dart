@@ -4,40 +4,39 @@ import 'screens/collection_screen.dart';
 import 'screens/scan_screen.dart';
 import 'services/card_generator.dart';
 import 'services/collection_db.dart';
+import 'theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final db = await CollectionDb.open();
-  runApp(MonsterTcgApp(db: db));
+  final themeController = await ThemeController.load(db);
+  runApp(MonsterTcgApp(db: db, themeController: themeController));
 }
 
 class MonsterTcgApp extends StatelessWidget {
-  const MonsterTcgApp({super.key, required this.db});
+  const MonsterTcgApp({super.key, required this.db, required this.themeController});
 
   final CollectionDb db;
+  final ThemeController themeController;
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Monster TCG',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        scaffoldBackgroundColor: const Color(0xFF0B0D0B),
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF7ED321),
-          brightness: Brightness.dark,
-        ),
-        useMaterial3: true,
+    return ValueListenableBuilder<AppThemeMode>(
+      valueListenable: themeController,
+      builder: (_, __, ___) => MaterialApp(
+        title: 'Monster TCG',
+        debugShowCheckedModeBanner: false,
+        theme: themeController.themeData,
+        home: Home(db: db, themeController: themeController),
       ),
-      home: Home(db: db),
     );
   }
 }
 
 class Home extends StatefulWidget {
-  const Home({super.key, required this.db});
+  const Home({super.key, required this.db, required this.themeController});
   final CollectionDb db;
+  final ThemeController themeController;
 
   @override
   State<Home> createState() => _HomeState();
@@ -50,9 +49,14 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     final pages = [
-      ScanScreen(db: widget.db, generator: _generator),
+      ScanScreen(db: widget.db, generator: _generator, themeController: widget.themeController),
       // Key forces a reload of the collection each time the tab is opened.
-      CollectionScreen(key: UniqueKey(), db: widget.db, generator: _generator),
+      CollectionScreen(
+        key: UniqueKey(),
+        db: widget.db,
+        generator: _generator,
+        themeController: widget.themeController,
+      ),
     ];
     return Scaffold(
       body: IndexedStack(index: _tab, children: pages),

@@ -4,13 +4,20 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 import '../models/flavor.dart';
 import '../services/card_generator.dart';
 import '../services/collection_db.dart';
+import '../theme.dart';
 import '../widgets/card_view.dart';
 
 class ScanScreen extends StatefulWidget {
-  const ScanScreen({super.key, required this.db, required this.generator});
+  const ScanScreen({
+    super.key,
+    required this.db,
+    required this.generator,
+    required this.themeController,
+  });
 
   final CollectionDb db;
   final CardGenerator generator;
+  final ThemeController themeController;
 
   @override
   State<ScanScreen> createState() => _ScanScreenState();
@@ -108,7 +115,10 @@ class _ScanScreenState extends State<ScanScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Scan a can')),
+      appBar: AppBar(
+        title: const Text('Scan a can'),
+        actions: [ThemeToggleButton(controller: widget.themeController)],
+      ),
       body: Stack(
         fit: StackFit.expand,
         children: [
