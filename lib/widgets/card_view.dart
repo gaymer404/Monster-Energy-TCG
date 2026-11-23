@@ -58,7 +58,12 @@ class CardView extends StatelessWidget {
                       card.flavor.name.toUpperCase(),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(fontWeight: FontWeight.w800, letterSpacing: .5),
+                      style: TextStyle(
+                        fontFamily: light ? 'BarlowCondensed' : null,
+                        fontSize: light ? 16 : null,
+                        fontWeight: FontWeight.w800,
+                        letterSpacing: .5,
+                      ),
                     ),
                   ),
                   CircleAvatar(

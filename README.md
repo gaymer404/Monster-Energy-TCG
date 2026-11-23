@@ -40,7 +40,7 @@ An Android app (built with Flutter) that scans your Monster Energy can and turns
 
 ## Themes
 
-Both the app and the website ship a dark theme (default) and a **Monster Ultra White** theme. Use the sun/moon button in the app bar, or the "Ultra White" button in the website nav. The choice is remembered (in the local database in the app, in `localStorage` on the site).
+Both the app and the website ship a dark theme (default) and a **Monster Ultra White** theme, with its own white/silver/ice-blue palette, Barlow Condensed headings ([SIL OFL](assets/fonts/OFL.txt)) and a bright banner ([docs/banner-ultra-white.png](docs/banner-ultra-white.png), AI-generated concept art). Use the sun/moon button in the app bar, or the "Ultra White" button in the website nav. The choice is remembered (in the local database in the app, in `localStorage` on the site).
 
 ## Website
 

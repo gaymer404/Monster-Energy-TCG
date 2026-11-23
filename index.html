@@ -20,7 +20,7 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Barlow+Condensed:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #0b0d0b;
@@ -54,9 +54,11 @@
       --muted: #55616b;
       --accent: #3f8a00;
       --on-green: #0b0d0b;
-      --glow: rgba(126, 211, 33, .25);
+      --glow: rgba(143, 211, 255, .45);
+      --display: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+      --ice: #8fd3ff;
       --nav-bg: rgba(255, 255, 255, .85);
-      --hero-glow: rgba(126, 211, 33, .14);
+      --hero-glow: rgba(143, 211, 255, .25);
       --final-glow: rgba(126, 211, 33, .16);
       --ghost-hover: rgba(63, 138, 0, .08);
       --card-edge: #d5dae0;
@@ -125,6 +127,12 @@
     .box p { margin: 0; color: var(--muted); }
     .num { width: 36px; height: 36px; border-radius: 50%; background: var(--green); color: var(--on-green); font-weight: 800; display: grid; place-items: center; }
     .features .box { border-top: 3px solid var(--green); }
+    :root[data-theme="ultra-white"] .features .box { border-top-color: var(--ice); }
+    :root[data-theme="ultra-white"] .box { box-shadow: 0 6px 20px rgba(15, 19, 17, .06); }
+    :root[data-theme="ultra-white"] h1 span { text-shadow: none; }
+    :root[data-theme="ultra-white"] h1, :root[data-theme="ultra-white"] h2 { letter-spacing: .02em; }
+    :root[data-theme="ultra-white"] .hero-img { box-shadow: 0 20px 60px rgba(120, 160, 190, .35); }
+    :root[data-theme="ultra-white"] .num { background: linear-gradient(135deg, var(--ice), var(--green)); }
 
     .cards { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; }
     .tcg { --c: var(--green); width: 220px; border-radius: 16px; padding: 10px; background: linear-gradient(145deg, var(--c), var(--card-edge) 70%); box-shadow: 0 0 30px color-mix(in srgb, var(--c) 40%, transparent); transition: transform .25s; }
@@ -186,7 +194,7 @@
         <a class="btn btn-ghost" href="#how">See how it works</a>
       </div>
     </div>
-    <img class="hero-img" src="docs/banner.png" alt="Concept art: a phone scanning a can while a glowing trading card appears">
+    <img class="hero-img" id="hero-img" src="docs/banner.png" data-ultra-white="docs/banner-ultra-white.png" data-dark="docs/banner.png" alt="Concept art: a phone scanning a can while a glowing trading card appears">
   </div>
 </header>
 
@@ -312,6 +320,9 @@
       var white = root.dataset.theme === "ultra-white";
       btn.setAttribute("aria-pressed", white);
       meta.content = white ? "#ffffff" : "#0b0d0b";
+      var hero = document.getElementById("hero-img");
+      var src = white ? hero.dataset.ultraWhite : hero.dataset.dark;
+      if (hero.getAttribute("src") !== src) hero.src = src;
     }
     btn.addEventListener("click", function () {
       var white = root.dataset.theme !== "ultra-white";

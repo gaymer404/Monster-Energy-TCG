@@ -32,7 +32,7 @@ class CollectionScreen extends StatelessWidget {
           if (!snap.hasData) return const Center(child: CircularProgressIndicator());
           final owned = snap.data!;
           if (owned.isEmpty) {
-            return const Center(child: Text('No cards yet. Scan a can to get started.'));
+            return _EmptyCollection(light: Theme.of(context).brightness == Brightness.light);
           }
           return GridView.builder(
             padding: const EdgeInsets.all(16),
@@ -51,6 +51,37 @@ class CollectionScreen extends StatelessWidget {
             },
           );
         },
+      ),
+    );
+  }
+}
+
+class _EmptyCollection extends StatelessWidget {
+  const _EmptyCollection({required this.light});
+
+  final bool light;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (light)
+              ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Image.asset(
+                  'docs/banner-ultra-white.png',
+                  cacheWidth: 900,
+                  semanticLabel: 'A phone scanning a white can while a trading card appears',
+                ),
+              ),
+            if (light) const SizedBox(height: 16),
+            const Text('No cards yet. Scan a can to get started.'),
+          ],
+        ),
       ),
     );
   }

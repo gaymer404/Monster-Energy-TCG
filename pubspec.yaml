@@ -21,3 +21,12 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - docs/banner-ultra-white.png
+  fonts:
+    - family: BarlowCondensed
+      fonts:
+        - asset: assets/fonts/BarlowCondensed-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/BarlowCondensed-ExtraBold.ttf
+          weight: 800

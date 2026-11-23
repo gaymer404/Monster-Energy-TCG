@@ -13,9 +13,26 @@ final ThemeData darkTheme = ThemeData(
   useMaterial3: true,
 );
 
-/// White Monster Ultra look: clean white surfaces, silver outlines, green accent.
+const _ultraFont = 'BarlowCondensed';
+const _iceBlue = Color(0xFF8FD3FF);
+
+TextTheme _ultraTextTheme() {
+  final base = ThemeData(brightness: Brightness.light).textTheme;
+  TextStyle? display(TextStyle? s) => s?.copyWith(fontFamily: _ultraFont, fontWeight: FontWeight.w800);
+  return base.copyWith(
+    headlineLarge: display(base.headlineLarge),
+    headlineMedium: display(base.headlineMedium),
+    headlineSmall: display(base.headlineSmall),
+    titleLarge: display(base.titleLarge),
+    titleMedium: display(base.titleMedium),
+  );
+}
+
+/// White Monster Ultra look: white surfaces, silver outlines, ice-blue and green accents,
+/// Barlow Condensed headings.
 final ThemeData ultraWhiteTheme = ThemeData(
   brightness: Brightness.light,
+  textTheme: _ultraTextTheme(),
   scaffoldBackgroundColor: Colors.white,
   colorScheme: ColorScheme.fromSeed(
     seedColor: monsterGreen,
@@ -25,16 +42,26 @@ final ThemeData ultraWhiteTheme = ThemeData(
     onPrimary: Colors.white,
     surface: Colors.white,
     onSurface: const Color(0xFF0F1311),
+    secondary: const Color(0xFF2F7FB5),
+    secondaryContainer: _iceBlue.withValues(alpha: .35),
     outlineVariant: const Color(0xFFDFE3E8),
   ),
   appBarTheme: const AppBarTheme(
     backgroundColor: Colors.white,
     foregroundColor: Color(0xFF0F1311),
     surfaceTintColor: Colors.transparent,
+    titleTextStyle: TextStyle(
+      fontFamily: _ultraFont,
+      fontWeight: FontWeight.w800,
+      fontSize: 24,
+      letterSpacing: .5,
+      color: Color(0xFF0F1311),
+    ),
   ),
-  navigationBarTheme: const NavigationBarThemeData(
+  navigationBarTheme: NavigationBarThemeData(
     backgroundColor: Colors.white,
     surfaceTintColor: Colors.transparent,
+    indicatorColor: _iceBlue.withValues(alpha: .35),
   ),
   useMaterial3: true,
 );
