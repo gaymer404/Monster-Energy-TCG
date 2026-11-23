@@ -25,10 +25,10 @@ if os.environ.get("DRY_RUN") == "1":
     sys.exit(0)
 
 client = tweepy.Client(
-    consumer_key=os.environ["X_API_KEY"],
-    consumer_secret=os.environ["X_API_SECRET"],
-    access_token=os.environ["X_ACCESS_TOKEN"],
-    access_token_secret=os.environ["X_ACCESS_TOKEN_SECRET"],
+    consumer_key=os.environ["z2q0ikDY92Zu75kd2KxVHPogG"],
+    consumer_secret=os.environ["HA2K7fJD1PecLfAISbcjDWwMLwprDQKNp0KGAG2PcDcShKlojV"],
+    access_token=os.environ["z2q0ikDY92Zu75kd2KxVHPogG"],
+    access_token_secret=os.environ["HA2K7fJD1PecLfAISbcjDWwMLwprDQKNp0KGAG2PcDcShKlojV"],
 )
 response = client.create_tweet(text=text)
 print(f"Posted {response.data['id']}:\n{text}")
