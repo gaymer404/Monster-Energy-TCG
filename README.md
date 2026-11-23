@@ -40,7 +40,16 @@ An Android app (built with Flutter) that scans your Monster Energy can and turns
 
 ## Website
 
-[index.html](index.html) is a single-file promo site with no build step. Open it in a browser, or publish it with GitHub Pages (Settings → Pages → deploy from the `main` branch, `/ (root)`).
+The promo site is [index.html](index.html), a single file with no build step. Once GitHub Pages is enabled it is served at **https://nikolmichaelidou.github.io/Monster-Energy-TCG/**.
+
+To publish it:
+
+1. Make sure `index.html` and `docs/banner.png` are committed and pushed to `main`.
+2. In the repository go to **Settings → Pages**.
+3. Under **Build and deployment**, choose **Deploy from a branch**, then select `main` and `/ (root)`.
+4. Save. The first deploy takes a minute or two.
+
+To preview it locally, open `index.html` in a browser.
 
 ## Getting started
 
