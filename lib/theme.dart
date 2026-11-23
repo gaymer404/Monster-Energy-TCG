@@ -15,6 +15,7 @@ final ThemeData darkTheme = ThemeData(
 
 const _ultraFont = 'BarlowCondensed';
 const _iceBlue = Color(0xFF8FD3FF);
+const _silver = Color(0xFFC5CCD3);
 
 TextTheme _ultraTextTheme() {
   final base = ThemeData(brightness: Brightness.light).textTheme;
@@ -28,23 +29,24 @@ TextTheme _ultraTextTheme() {
   );
 }
 
-/// White Monster Ultra look: white surfaces, silver outlines, ice-blue and green accents,
+/// Monster Ultra White look: white surfaces, silver outlines, icy-blue accents (no green),
 /// Barlow Condensed headings.
 final ThemeData ultraWhiteTheme = ThemeData(
   brightness: Brightness.light,
   textTheme: _ultraTextTheme(),
   scaffoldBackgroundColor: Colors.white,
   colorScheme: ColorScheme.fromSeed(
-    seedColor: monsterGreen,
+    seedColor: _iceBlue,
     brightness: Brightness.light,
   ).copyWith(
-    primary: const Color(0xFF3F8A00),
+    primary: const Color(0xFF1F6FA3),
     onPrimary: Colors.white,
     surface: Colors.white,
     onSurface: const Color(0xFF0F1311),
-    secondary: const Color(0xFF2F7FB5),
+    secondary: const Color(0xFF5B6B78),
     secondaryContainer: _iceBlue.withValues(alpha: .35),
-    outlineVariant: const Color(0xFFDFE3E8),
+    outline: _silver,
+    outlineVariant: const Color(0xFFD9DEE3),
   ),
   appBarTheme: const AppBarTheme(
     backgroundColor: Colors.white,

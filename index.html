@@ -55,22 +55,24 @@
       --body: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
       color-scheme: dark;
     }
-    /* Monster Ultra White: white surfaces, silver lines, green kept for fills */
+    /* Monster Ultra White: white surfaces, silver lines and icy-blue accents (no green) */
     :root[data-theme="ultra-white"] {
       --bg: #ffffff;
-      --panel: #f4f6f8;
-      --line: #dfe3e8;
+      --panel: #f5f7f9;
+      --line: #d9dee3;
       --text: #0f1311;
       --muted: #55616b;
-      --accent: #3f8a00;
+      --accent: #1f6fa3;
+      --green: #8fd3ff;
       --on-green: #0b0d0b;
+      --silver: #c5ccd3;
       --glow: rgba(143, 211, 255, .45);
       --display: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
       --ice: #8fd3ff;
       --nav-bg: rgba(255, 255, 255, .85);
-      --hero-glow: rgba(143, 211, 255, .25);
-      --final-glow: rgba(126, 211, 33, .16);
-      --ghost-hover: rgba(63, 138, 0, .08);
+      --hero-glow: rgba(143, 211, 255, .28);
+      --final-glow: rgba(143, 211, 255, .22);
+      --ghost-hover: rgba(31, 111, 163, .08);
       --card-edge: #d5dae0;
       --card-face: #fafbfc;
       --art-top: #f4f6f8;
@@ -140,10 +142,12 @@
     .features .box { border-top: 3px solid var(--green); }
     :root[data-theme="ultra-white"] .features .box { border-top-color: var(--ice); }
     :root[data-theme="ultra-white"] .box { box-shadow: 0 6px 20px rgba(15, 19, 17, .06); }
+    :root[data-theme="ultra-white"] .btn-primary { box-shadow: 0 6px 20px rgba(143, 211, 255, .55); }
+    :root[data-theme="ultra-white"] .btn-ghost { border-color: var(--silver); }
     :root[data-theme="ultra-white"] h1 span { text-shadow: none; }
     :root[data-theme="ultra-white"] h1, :root[data-theme="ultra-white"] h2 { letter-spacing: .02em; }
     :root[data-theme="ultra-white"] .hero-img { box-shadow: 0 20px 60px rgba(120, 160, 190, .35); }
-    :root[data-theme="ultra-white"] .num { background: linear-gradient(135deg, var(--ice), var(--green)); }
+    :root[data-theme="ultra-white"] .num { background: linear-gradient(135deg, var(--ice), var(--silver)); }
 
     .cards { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; }
     .tcg { --c: var(--green); width: 220px; border-radius: 16px; padding: 10px; background: linear-gradient(145deg, var(--c), var(--card-edge) 70%); box-shadow: 0 0 30px color-mix(in srgb, var(--c) 40%, transparent); transition: transform .25s; }
