@@ -38,6 +38,10 @@ An Android app (built with Flutter) that scans your Monster Energy can and turns
 - [ ] Photo-based can recognition
 - [ ] Real card artwork
 
+## Website
+
+[index.html](index.html) is a single-file promo site with no build step. Open it in a browser, or publish it with GitHub Pages (Settings → Pages → deploy from the `main` branch, `/ (root)`).
+
 ## Getting started
 
 Requires the [Flutter SDK](https://docs.flutter.dev/get-started/install) and an Android device or emulator.
