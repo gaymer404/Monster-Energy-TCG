@@ -48,6 +48,14 @@ The promo site is [index.html](index.html), a single file with no build step, pu
 
 It is deployed from the `main` branch, `/ (root)` (Settings → Pages). To preview it locally, open `index.html` in a browser.
 
+## Posting on X
+
+The **Promote on X** workflow posts daily at 16:00 UTC. Manual runs default to a dry run; disable `dry_run` to publish.
+
+For live posts, configure an X developer app with OAuth 1.0a and Read and write permissions. In GitHub, add its API key and secret as Actions secrets `X_API_KEY` and `X_API_SECRET`, and its user access token and secret as `X_ACCESS_TOKEN` and `X_ACCESS_TOKEN_SECRET` (Settings → Secrets and variables → Actions). All four must belong to the same app and authorized account; regenerate the access token after changing app permissions.
+
+If a live run fails with HTTP 401, verify the keys and tokens in the X developer portal, regenerate them if needed, and update the corresponding GitHub Actions secrets. Run the workflow manually with `dry_run` disabled to verify authentication. A dry run does not validate credentials or publish a post.
+
 ## Project structure
 
 | Path | Purpose |

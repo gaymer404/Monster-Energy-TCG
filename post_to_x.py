@@ -46,6 +46,8 @@ client = tweepy.Client(
 )
 try:
     response = client.create_tweet(text=text)
+except tweepy.Unauthorized:
+    sys.exit("X API request failed: Unauthorized (HTTP 401). Check that all four X Actions secrets belong to the same app and account, and regenerate and update them if necessary. See README.md for setup.")
 except tweepy.Forbidden as exc:
     # A manual run plus the scheduled run on the same day posts the same text; that is not a failure.
     if "duplicate" in str(exc).lower():
