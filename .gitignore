@@ -10,3 +10,10 @@ android/.gradle/
 android/local.properties
 android/key.properties
 android/app/*.jks
+
+# Local secrets: never commit API keys or tokens
+.env
+.env.*
+*.pem
+*.key
+secrets.*
